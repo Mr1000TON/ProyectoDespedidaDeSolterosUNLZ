@@ -13,15 +13,10 @@ namespace GestorEventos.Servicios.Entidades
         public int IdPersona { get; set; }
         public string Nombre { get; set; }
         public string Apellido {  get; set; }
-        public string DireccionCalle { get; set; }
-        public int DireccionNumero { get; set; }
-        public int DireccionPiso  { get; set; }
-        public int DireccionDepartamento  { get; set; }
-        public string DireccionLocalidad { get; set; }
-        public string DireccionProvincia { get; set; }
-        public int DireccionCodigoPostal { get; set; }
         public string Telefono {  get; set; }
         public string Email {  get; set; }
+        public bool Visible { get; set; }
+
     }
 
 

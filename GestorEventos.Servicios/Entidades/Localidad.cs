@@ -8,9 +8,11 @@ namespace GestorEventos.Servicios.Entidades
 {
     public class Localidad
     {
-
         public int IdLocalidad {  get; set; }
-    
+        public string Nombre { get; set; }
+        public int CodigoPostal {  get; set; }
+        public bool Visible { get; set; }
+
 
     }
 }

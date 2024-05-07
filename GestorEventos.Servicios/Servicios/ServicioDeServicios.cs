@@ -43,7 +43,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<Entidades.Servicios> Get()
         {
-            return Servicios;
+            return Servicios.Where(x=>x.Visible == true);
         }
 
         public Entidades.Servicios GetServiciosId(int IdServicio)
@@ -75,8 +75,40 @@ namespace GestorEventos.Servicios.Servicios
 
         }
 
+        public bool modificarServicio(int IdServicio, Entidades.Servicios servicios)
+        {
+            try
+            {
+                var servicioAModificar = Servicios.Where(x => x.IdServicios == IdServicio).First();
+
+                servicioAModificar.Descripcion = servicios.Descripcion;
+                servicioAModificar.PrecioServicio = servicios.PrecioServicio;
+                servicioAModificar.PrecioServicio = servicios.PrecioServicio;
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
 
 
+        public bool eliminarServicio(int IdServicio)
+        {
+            try
+            {
+                var servicioAEliminar = Servicios.Where(x => x.IdServicios == IdServicio).First();
+
+                servicioAEliminar.Visible = false;
+
+                return true; 
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
 
 

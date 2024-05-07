@@ -11,14 +11,14 @@ namespace GestorDespedidasDeSoltero.Controllers
     {
 
 
-        [HttpGet]
+        [HttpGet("ObtenerServicio")]
         public IActionResult Get()
         {
             ServicioDeServicios sServicio = new ServicioDeServicios();
             return Ok(sServicio.Get());
         }
 
-        [HttpGet("{IdServicio:int}")]
+        [HttpGet("ObtenerIdServicio/{IdServicio:int}")]
 
         public IActionResult GetServicioId(int IdServicio)
         {
@@ -41,6 +41,28 @@ namespace GestorDespedidasDeSoltero.Controllers
             return Ok();
         }
 
+        [HttpPut("ModificarServicio/{IdServicio:int}")]
+        public IActionResult PutNuevoServicio(int IdServicio,[FromBody] Servicios servicios)
+        {
+            ServicioDeServicios sServicios = new ServicioDeServicios();
+            bool resultado = sServicios.modificarServicio(IdServicio, servicios);
 
+            if (resultado)
+                return Ok();
+            else
+                return UnprocessableEntity();
+        }
+
+        [HttpDelete("EliminarServicio/{IdServicio:int}")]
+        public IActionResult DeleteServicio(int IdServicio)
+        {
+            ServicioDeServicios sServicio = new ServicioDeServicios();
+            bool resultado = sServicio.eliminarServicio(IdServicio);
+
+            if (resultado)
+                return Ok();
+            else
+                return UnprocessableEntity(); 
+        }
     }
 }

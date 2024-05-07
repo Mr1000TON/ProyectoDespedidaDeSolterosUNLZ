@@ -22,48 +22,51 @@ namespace GestorEventos.Servicios.Servicios
                     Apellido = "Garcia" ,
                     Email = "JorgelitoGarciaGamer@gmail.com" ,
                     Telefono = "+1",
-                    DireccionProvincia = "Provincia1",
-                    DireccionLocalidad = "Localidad1",
-                    DireccionDepartamento = 0,
-                    DireccionPiso = 0,
-                    DireccionCalle = "Calle1",
-                    DireccionNumero = 111,
-                    DireccionCodigoPostal = 1111
+                    Visible = true
                 },
                 new Personas{ IdPersona = 2,
                     Nombre = "Manuel" ,
                     Apellido = "Perez" ,
                     Email = "Manuel777Gamer@gmail.com" ,
                     Telefono = "+2",
-                    DireccionProvincia = "Provincia2",
-                    DireccionLocalidad = "Localidad2",
-                    DireccionDepartamento = 0,
-                    DireccionPiso = 0,
-                    DireccionCalle = "Calle2",
-                    DireccionNumero = 222,
-                    DireccionCodigoPostal = 2222
+                    Visible = true
                 }
             };
         }
-            public IEnumerable<Personas> GetPersonas()
+        public IEnumerable<Personas> GetPersonas()
+        {
+            return this.Personas.Where(x=>x.Visible == true); 
+        }
+
+        public Personas? GetPersonasId(int IdPersona)
+        {
+
+            try
             {
-                return this.Personas; 
+                Personas personas = Personas.Where(x => x.IdPersona == IdPersona).First();
+                return personas;
+            }
+            catch(Exception ex)
+            {
+                return null; 
             }
 
-            public Personas? GetPersonasId(int IdPersona)
+        }
+
+        public bool AgregarPersona(Personas personas)
+        {
+            try
             {
+                List<Personas> lista = Personas.ToList();
 
-                try
-                {
-                    Personas personas = Personas.Where(x => x.IdPersona == IdPersona).First();
-                    return personas;
-                }
-                catch(Exception ex)
-                {
-                    return null; 
-                }
-
+                return true; 
             }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
 
     }
 }

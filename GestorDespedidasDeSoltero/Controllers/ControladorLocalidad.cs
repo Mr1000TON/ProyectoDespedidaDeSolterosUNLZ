@@ -9,7 +9,7 @@ namespace GestorDespedidasDeSoltero.Controllers
     [Route("[controller]")]
     public class ControladorLocalidad : Controller
     {
-        [HttpGet]
+        [HttpGet("ObtenerLocalidad")]
         public IActionResult Index()
         {
 
@@ -18,7 +18,7 @@ namespace GestorDespedidasDeSoltero.Controllers
 
         }
 
-        [HttpGet("{IdLocalidad:int}")]
+        [HttpGet("ObtenerIdLocalidad/{IdLocalidad:int}")]
         public IActionResult GetLocalidadId(int IdLocalidad)
         {
             ServicioLocalidad sLocalidad = new ServicioLocalidad(); 
@@ -29,9 +29,45 @@ namespace GestorDespedidasDeSoltero.Controllers
                 return NotFound();
             else 
                 return Ok(localidad);
+        }
 
+        [HttpPost("AgregarLocalidad")]
+        public IActionResult AgregarLocalidad([FromBody] Localidad localidad)
+        {
+            ServicioLocalidad sLocalidad = new ServicioLocalidad();
+
+            bool resultado = sLocalidad.AgregarLocalidad(localidad);
+
+            if (resultado)
+                return Ok();
+            else
+                return UnprocessableEntity(); 
+        }
+
+        [HttpPut("ModificarLocalidad/{IdLocalidad:int}")]
+        public IActionResult ModificarLocalidad(int IdLocalidad, [FromBody] Localidad localidad)
+        {
+            ServicioLocalidad sLocalidad = new ServicioLocalidad();
+
+            bool resultado = sLocalidad.ModificarLocalidad(IdLocalidad, localidad);
+
+            if (resultado)
+                return Ok();
+            else
+                return UnprocessableEntity(); 
 
         }
 
+        [HttpDelete("EliminarLocalidad/{IdLocalidad:int}")]
+        public IActionResult EliminarLocalidad(int IdLocalidad)
+        {
+            ServicioLocalidad sLocalidad = new ServicioLocalidad();
+            bool resultado = sLocalidad.EliminarLocalidad(IdLocalidad);
+
+            if (resultado)
+                return Ok();
+            else
+                return UnprocessableEntity(); 
+        }
     }
 }
