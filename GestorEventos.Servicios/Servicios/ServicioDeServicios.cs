@@ -41,12 +41,12 @@ namespace GestorEventos.Servicios.Servicios
         }
 
 
-        public IEnumerable<Entidades.Servicios> Get()
+        public IEnumerable<Entidades.Servicios> ObtenerServicios()
         {
-            return Servicios.Where(x=>x.Visible == true);
+            return Servicios;
         }
 
-        public Entidades.Servicios GetServiciosId(int IdServicio)
+        public Entidades.Servicios ObtenerServicioId(int IdServicio)
         {
             try
             {
@@ -60,49 +60,26 @@ namespace GestorEventos.Servicios.Servicios
         }
 
 
-        public bool agregarServicio(Entidades.Servicios servicios)
+        public bool AgregarServicio(Entidades.Servicios servicios)
         {
             try
             {
                 List<Entidades.Servicios> lista = Servicios.ToList();
                 lista.Add(servicios);
-                return true; 
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
-
-        }
-
-        public bool modificarServicio(int IdServicio, Entidades.Servicios servicios)
-        {
-            try
-            {
-                var servicioAModificar = Servicios.Where(x => x.IdServicios == IdServicio).First();
-
-                servicioAModificar.Descripcion = servicios.Descripcion;
-                servicioAModificar.PrecioServicio = servicios.PrecioServicio;
-                servicioAModificar.PrecioServicio = servicios.PrecioServicio;
-
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
+
         }
 
-
-        public bool eliminarServicio(int IdServicio)
+        public bool ModificarServicio(int IdServicio, Entidades.Servicios servicios)
         {
             try
             {
-                var servicioAEliminar = Servicios.Where(x => x.IdServicios == IdServicio).First();
-
-                servicioAEliminar.Visible = false;
-
-                return true; 
+                return true;
             }
             catch (Exception ex)
             {
@@ -110,7 +87,29 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
+        public bool ModificarDatoServicio(int IdServicio, Entidades.Servicios servicios)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
+        public bool EliminarServicio(int IdServicio)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
     }
 }

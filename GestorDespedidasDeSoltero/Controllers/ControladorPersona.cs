@@ -9,26 +9,65 @@ namespace GestorDespedidasDeSoltero.Controllers
     public class ControladorPersona : Controller
     {
 
-        [HttpGet]
+        [HttpGet("ObtenerPersonas")]
         public IActionResult Get()
         {
             ServicioPersonas sPersonas = new ServicioPersonas();
-            return Ok(sPersonas.GetPersonas());
+            return Ok(sPersonas.ObtenerPersonas());
         }
 
-        [HttpGet("{IdPersona:int}")]
+        [HttpGet("ObtenerIdPersona/{IdPersona:int}")]
 
         public IActionResult GetId(int IdPersona)
         {
             ServicioPersonas sPersonas = new ServicioPersonas();
-            Personas personas = sPersonas.GetPersonasId(IdPersona);
+            Personas personas = sPersonas.ObtenerIdPersona(IdPersona);
 
             if (personas == null)
                 return NotFound(); 
             else 
                 return Ok(personas);
 
-        } 
+        }
 
+        [HttpPost("AgregarNuevaPersona")]
+        public IActionResult AgregarPersona([FromBody] Personas personas)
+        {
+            ServicioPersonas sPersonas = new ServicioPersonas();
+            sPersonas.AgregarPersona(personas);
+            return Ok();
+        }
+
+        [HttpPut("ModificarPersna/{IdPersona:int}")]
+        public IActionResult ModificarPersona(int IdPersona, Personas personas)
+        {
+            ServicioPersonas sPersonas = new ServicioPersonas();
+            sPersonas.ModificarPersona(IdPersona, personas);
+            return Ok();
+        }
+
+        [HttpPatch("BorradoLogicoPersona/{IdPersona:int}")]
+        public IActionResult BorradoLogicoPersona(int IdPersona)
+        {
+            ServicioPersonas sPersonas = new ServicioPersonas();
+            sPersonas.BorradoLogicoPersona(IdPersona);
+            return Ok();
+        }
+
+        [HttpPatch("DesacerBorradoLogicoPersona/{IdPersona:int}")]
+        public IActionResult DesacerBorradoLogicoPersona(int IdPersona)
+        {
+            ServicioPersonas sPersonas = new ServicioPersonas();
+            sPersonas.DesacerBorradoLogicoPersona(IdPersona);
+            return Ok();
+        }
+
+        [HttpDelete("BorradoFisicoPersona/{IdPersona:int}")]
+        public IActionResult BorradoFisicoPersona(int IdPersona)
+        {
+            ServicioPersonas sPersonas = new ServicioPersonas();
+            sPersonas.BorradoFisicoPersona(IdPersona);
+            return Ok();
+        }
     }
 }

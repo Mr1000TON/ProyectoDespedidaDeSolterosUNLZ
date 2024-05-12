@@ -10,7 +10,7 @@ namespace GestorEventos.Servicios.Entidades
     {
         public int IdTipoEvento { get; set; }
         public string Descripcion { get; set; }
-        public bool Visible { get; set; }
+        public bool Borrado { get; set; }
 
     }
 }

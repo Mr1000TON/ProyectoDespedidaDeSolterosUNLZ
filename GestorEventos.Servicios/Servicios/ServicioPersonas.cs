@@ -1,6 +1,9 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿using Dapper;
+using GestorEventos.Servicios.Entidades;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,62 +14,85 @@ namespace GestorEventos.Servicios.Servicios
     {
         //IEnumerable se utiliza para generar una lista de objetos
 
-        public IEnumerable<Personas> Personas { get; set; }
-        
+        private string _connectionString; 
+
         public ServicioPersonas() {
 
-            Personas = new List<Personas>{
-
-                new Personas{ IdPersona = 1,
-                    Nombre = "Jorgelito" ,
-                    Apellido = "Garcia" ,
-                    Email = "JorgelitoGarciaGamer@gmail.com" ,
-                    Telefono = "+1",
-                    Visible = true
-                },
-                new Personas{ IdPersona = 2,
-                    Nombre = "Manuel" ,
-                    Apellido = "Perez" ,
-                    Email = "Manuel777Gamer@gmail.com" ,
-                    Telefono = "+2",
-                    Visible = true
-                }
-            };
+            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            //"Password=admin;Persist Security Info=True;User ID=root;Initial Catalog=db_py_unlz;Data Source=MYSQL";
         }
-        public IEnumerable<Personas> GetPersonas()
+        public IEnumerable<Personas> ObtenerPersonas()
         {
-            return this.Personas.Where(x=>x.Visible == true); 
-        }
-
-        public Personas? GetPersonasId(int IdPersona)
-        {
-
-            try
+            
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                Personas personas = Personas.Where(x => x.IdPersona == IdPersona).First();
+                List<Personas> personas = db.Query<Personas>("SELECT * FROM personas WHERE Borrado = 0").ToList();
                 return personas;
             }
-            catch(Exception ex)
+
+
+        }
+
+        public Personas? ObtenerIdPersona(int IdPersona)
+        {
+
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                return null; 
+                Personas personas = db.Query<Personas>("SELECT * FROM personas WHERE IdPersona = " + IdPersona.ToString()).First();
+                return personas;
             }
 
         }
 
         public bool AgregarPersona(Personas personas)
         {
-            try
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                List<Personas> lista = Personas.ToList();
-
-                return true; 
-            }
-            catch(Exception ex)
-            {
-                return false;
+                string query = "INSERT INTO personas(Nombre,Apellido,Email,Telefono) VALUES(@Nombre,@Apellido,@Email,@Telefono)";
+                db.Execute(query, personas);
+                return true;
             }
         }
 
+        public bool ModificarPersona(int IdPersona, Personas personas)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "UPDATE personas SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono WHERE IdPersona = " + IdPersona.ToString();
+                db.Execute(query, personas);
+                return true;
+            }
+        }
+
+        public bool BorradoLogicoPersona(int IdPersona)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "UPDATE personas SET Borrado = 1 WHERE IdPersona = " + IdPersona.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
+        
+        public bool DesacerBorradoLogicoPersona(int IdPersona)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "UPDATE personas SET Borrado = 0 WHERE IdPersona = " + IdPersona.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
+
+        public bool BorradoFisicoPersona(int IdPersona)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "DELETE FROM personas WHERE IdPersona = " + IdPersona.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
 
     }
 }

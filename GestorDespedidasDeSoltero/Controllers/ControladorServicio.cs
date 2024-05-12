@@ -11,19 +11,19 @@ namespace GestorDespedidasDeSoltero.Controllers
     {
 
 
-        [HttpGet("ObtenerServicio")]
-        public IActionResult Get()
+        [HttpGet("ObtenerServicios")]
+        public IActionResult Servicios()
         {
             ServicioDeServicios sServicio = new ServicioDeServicios();
-            return Ok(sServicio.Get());
+            return Ok(sServicio.ObtenerServicios());
         }
 
-        [HttpGet("ObtenerIdServicio/{IdServicio:int}")]
+        [HttpGet("ObtenerServicio/{IdServicio:int}")]
 
-        public IActionResult GetServicioId(int IdServicio)
+        public IActionResult ServicioId(int IdServicio)
         {
             ServicioDeServicios sServicio = new ServicioDeServicios();
-            Servicios servicios = sServicio.GetServiciosId(IdServicio);
+            Servicios servicios = sServicio.ObtenerServicioId(IdServicio);
 
             if (servicios == null)
                 return NotFound();
@@ -33,36 +33,31 @@ namespace GestorDespedidasDeSoltero.Controllers
         }
 
         [HttpPost("NuevoServicio")]
-        public IActionResult PostNuevoServicio([FromBody] Servicios nServicio)
+        public IActionResult NuevoServicio([FromBody] Servicios servicios)
         {
             ServicioDeServicios sServicio = new ServicioDeServicios();
-            sServicio.agregarServicio(nServicio);
+            sServicio.AgregarServicio(servicios);
 
             return Ok();
         }
 
         [HttpPut("ModificarServicio/{IdServicio:int}")]
-        public IActionResult PutNuevoServicio(int IdServicio,[FromBody] Servicios servicios)
+        public IActionResult ModificarServicio([FromBody] Servicios servicios)
         {
-            ServicioDeServicios sServicios = new ServicioDeServicios();
-            bool resultado = sServicios.modificarServicio(IdServicio, servicios);
-
-            if (resultado)
-                return Ok();
-            else
-                return UnprocessableEntity();
+            return Ok();
         }
 
-        [HttpDelete("EliminarServicio/{IdServicio:int}")]
-        public IActionResult DeleteServicio(int IdServicio)
+        [HttpPatch("ModificarDatoServicio{IdServicio:int}")]
+        public IActionResult ModificarDatoServicio(int IdServicio)
         {
-            ServicioDeServicios sServicio = new ServicioDeServicios();
-            bool resultado = sServicio.eliminarServicio(IdServicio);
-
-            if (resultado)
-                return Ok();
-            else
-                return UnprocessableEntity(); 
+            return Ok();
         }
+
+        [HttpDelete("BorrarServicio/{IdServicio:int}")]
+        public IActionResult BorrarServicio(int IdServicio)
+        {
+            return Ok();
+        }
+        
     }
 }

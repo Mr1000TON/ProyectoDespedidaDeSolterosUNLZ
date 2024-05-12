@@ -45,7 +45,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<Evento> Get()
         {
-            return Evento.Where(x=>x.Visible == true);
+            return Evento;
         }
 
         public Evento GetEventoId(int IdEvento)
@@ -61,52 +61,8 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public bool AgregarNuevoEvento(Evento evento)
-        {
-            try
-            {
-                List<Evento> lista = Evento.ToList();
-                lista.Add(evento);
-                return true;
-            }
-            catch(Exception ex)
-            {
-                return false; 
-            }
-        }
 
-        public bool ModificarEvento(int IdEvento, Evento evento)
-        {
-            try
-            {
-                var eventoAModificar = Evento.Where(x => x.IdEvento == IdEvento).First();
 
-                eventoAModificar.IdTipoDeDespedida = evento.IdTipoDeDespedida;
-                eventoAModificar.IdPersonaAgasajada = evento.IdPersonaAgasajada;
-                eventoAModificar.IdPersonaContacto = evento.IdPersonaContacto;
-                eventoAModificar.Nombre = evento.Nombre;
-                eventoAModificar.FechaEvento = evento.FechaEvento;
-                eventoAModificar.CantPersonas = evento.CantPersonas;
-
-                return true; 
-            }
-            catch(Exception ex)
-            {
-                return false; 
-            }
-        }
-
-        public bool EliminarEvento(int IdEvento)
-        {
-            try
-            {
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
 
     }
 }

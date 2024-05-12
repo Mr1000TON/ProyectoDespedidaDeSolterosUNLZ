@@ -8,11 +8,13 @@ namespace GestorEventos.Servicios.Entidades
 {
     public class Direccion
     {
-        public int IdDireccion {  get; set; }
-        public string Calle { get; set; }
-        public string Piso {  get; set; }
-        public string Departamento {  get; set; }
-        public string NumeroCalle {  get; set; }
-        public bool Visible {  get; set; }
+
+        public string DireccionCalle { get; set; }
+        public int DireccionNumero { get; set; }
+        public int DireccionPiso { get; set; }
+        public int DireccionDepartamento { get; set; }
+        public bool Borrado { get; set; }
+
+
     }
 }

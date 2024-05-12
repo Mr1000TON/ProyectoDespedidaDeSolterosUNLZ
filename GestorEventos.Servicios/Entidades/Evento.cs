@@ -16,7 +16,8 @@ namespace GestorEventos.Servicios.Entidades
         public string Nombre {  get; set; } 
         public string FechaEvento {  get; set; }
         public int CantPersonas { get; set; }
-        public bool Visible { get; set; }
+        public bool Borrado { get; set; }
+
 
     }
 }
