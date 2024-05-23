@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Entidades
 {
-    public class Servicios
+    public class Servicio
     {
 
-        public int IdServicios {  get; set; }
+        public int IdServicio {  get; set; }
         public string Descripcion {  get; set; }
         public decimal PrecioServicio {  get; set; }
         public bool Borrado { get; set; }
