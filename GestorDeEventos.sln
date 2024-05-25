@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorDespedidasDeSoltero",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorEventos.Servicios", "GestorEventos.Servicios\GestorEventos.Servicios.csproj", "{BF59C516-EF26-48FC-ADB7-CD6FBC826CF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorEventos.WebAdmin", "GestorEventos.WebAdmin\GestorEventos.WebAdmin.csproj", "{78225BD0-82ED-4B00-9AA4-198F3499E8BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorEventos.WebAdmin", "GestorEventos.WebAdmin\GestorEventos.WebAdmin.csproj", "{78225BD0-82ED-4B00-9AA4-198F3499E8BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorEventos.WebUsuario", "GestorEventos.WebUsuario\GestorEventos.WebUsuario.csproj", "{30A8D646-211A-4BA9-B3C6-93167A360CC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{78225BD0-82ED-4B00-9AA4-198F3499E8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78225BD0-82ED-4B00-9AA4-198F3499E8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78225BD0-82ED-4B00-9AA4-198F3499E8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A8D646-211A-4BA9-B3C6-93167A360CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A8D646-211A-4BA9-B3C6-93167A360CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A8D646-211A-4BA9-B3C6-93167A360CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A8D646-211A-4BA9-B3C6-93167A360CC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

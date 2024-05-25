@@ -10,20 +10,32 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServicioPersonas
+    public interface IServicioPersonas
+    {
+        bool AgregarPersona(Personas personas);
+        bool BorradoFisicoPersona(int IdPersona);
+        bool BorradoLogicoPersona(int IdPersona);
+        bool DesacerBorradoLogicoPersona(int IdPersona);
+        bool ModificarPersona(int IdPersona, Personas personas);
+        Personas? ObtenerIdPersona(int IdPersona);
+        IEnumerable<Personas> ObtenerPersonas();
+    }
+
+    public class ServicioPersonas : IServicioPersonas
     {
         //IEnumerable se utiliza para generar una lista de objetos
 
-        private string _connectionString; 
+        private string _connectionString;
 
-        public ServicioPersonas() {
+        public ServicioPersonas()
+        {
 
             _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
             //"Password=admin;Persist Security Info=True;User ID=root;Initial Catalog=db_py_unlz;Data Source=MYSQL";
         }
         public IEnumerable<Personas> ObtenerPersonas()
         {
-            
+
             using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 List<Personas> personas = db.Query<Personas>("SELECT * FROM personas WHERE Borrado = 0").ToList();
@@ -73,7 +85,7 @@ namespace GestorEventos.Servicios.Servicios
                 return true;
             }
         }
-        
+
         public bool DesacerBorradoLogicoPersona(int IdPersona)
         {
             using (MySqlConnection db = new MySqlConnection(_connectionString))

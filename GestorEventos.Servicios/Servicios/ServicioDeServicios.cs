@@ -9,7 +9,18 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServicioDeServicios
+    public interface IServicioDeServicios
+    {
+        bool AgregarServicio(Servicio servicios);
+        bool BorradoFisicoServicio(int IdServicio);
+        bool BorradoLogicoServicio(int IdServicio);
+        bool DesacerBorradoLogicoServicio(int IdServicio);
+        bool ModificarServicio(int IdServicio, Servicio servicios);
+        Servicio ObtenerServicioId(int IdServicio);
+        IEnumerable<Servicio> ObtenerServicios();
+    }
+
+    public class ServicioDeServicios : IServicioDeServicios
     {
 
         private string _connectionString;
@@ -17,7 +28,7 @@ namespace GestorEventos.Servicios.Servicios
         public ServicioDeServicios()
         {
             _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
-        } 
+        }
 
 
         public IEnumerable<Servicio> ObtenerServicios()
@@ -37,7 +48,7 @@ namespace GestorEventos.Servicios.Servicios
                 return servicios;
             }
         }
-        
+
 
 
         public bool AgregarServicio(Servicio servicios)
