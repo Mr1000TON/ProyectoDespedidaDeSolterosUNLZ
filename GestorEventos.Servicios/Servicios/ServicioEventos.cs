@@ -1,4 +1,6 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿using Dapper;
+using GestorEventos.Servicios.Entidades;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,56 +9,84 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServicioEventos
+    public interface IServicioEventos
+    {
+        bool AgregarEvento(Evento evento);
+        bool BorradoFisicoEvento(int IdEvento);
+        bool BorradoLogicoEvento(int IdEvento);
+        bool ModificarEvento(int IdEvento, Evento evento);
+        IEnumerable<Evento> ObtenerEventos();
+        Evento ObtenerEventosId(int IdEvento);
+    }
+
+    public class ServicioEventos : IServicioEventos
     {
 
-        IEnumerable<Evento> Evento { get; set; }
+        private string _connectionString;
 
         public ServicioEventos()
         {
-
-
-            Evento = new List<Evento>
-            {
-                new Evento
-                {
-                    IdEvento = 1,
-                    IdTipoDeDespedida = 1,
-                    IdPersonaAgasajada = 1,
-                    IdPersonaContacto = 1,
-                    Nombre = "Juan",
-                    FechaEvento = "29/4/24",
-                    CantPersonas = 50,
-                },
-                new Evento
-                {
-                    IdEvento = 2,
-                    IdTipoDeDespedida = 2,
-                    IdPersonaAgasajada = 2,
-                    IdPersonaContacto = 2,
-                    Nombre = "Pepe",
-                    FechaEvento = "30/4/24",
-                    CantPersonas = 20
-                },
-            };
+            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
-        public IEnumerable<Evento> Get()
+
+        public IEnumerable<Evento> ObtenerEventos()
         {
-            return Evento;
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                List<Evento> servicios = db.Query<Evento>("").ToList();
+                return servicios;
+            }
         }
 
-        public Evento GetEventoId(int IdEvento)
+        public Evento ObtenerEventosId(int IdEvento)
         {
-            try
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                Evento evento = Evento.Where(x => x.IdEvento == IdEvento).First(); 
+                Evento evento = db.Query<Evento>("" + IdEvento.ToString()).First();
                 return evento;
             }
-            catch (Exception ex)
+        }
+
+        public bool AgregarEvento(Evento evento)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                return null;
+                string query = "";
+                db.Execute(query, evento);
+                return true;
             }
         }
+
+        public bool ModificarEvento(int IdEvento, Evento evento)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdEvento.ToString();
+                db.Execute(query, evento);
+                return true;
+            }
+        }
+
+        public bool BorradoLogicoEvento(int IdEvento)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdEvento.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
+
+        public bool BorradoFisicoEvento(int IdEvento)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdEvento.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
+
     }
 }

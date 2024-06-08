@@ -14,7 +14,6 @@ namespace GestorEventos.Servicios.Servicios
         bool AgregarServicio(Servicio servicios);
         bool BorradoFisicoServicio(int IdServicio);
         bool BorradoLogicoServicio(int IdServicio);
-        bool DesacerBorradoLogicoServicio(int IdServicio);
         bool ModificarServicio(int IdServicio, Servicio servicios);
         Servicio ObtenerServicioId(int IdServicio);
         IEnumerable<Servicio> ObtenerServicios();
@@ -27,12 +26,15 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioDeServicios()
         {
-            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            //JUAN _connectionString = "Data Source=Jimi-Floyd\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            /*MILTON*/ _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
 
         public IEnumerable<Servicio> ObtenerServicios()
         {
+            //using (IDbConnection db = new SqlConnection(_connectionString))
+
             using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 List<Servicio> servicios = db.Query<Servicio>("SELECT * FROM servicios WHERE Borrado = 0").ToList();
@@ -77,16 +79,6 @@ namespace GestorEventos.Servicios.Servicios
             using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "UPDATE servicios SET Borrado = 1 WHERE IdServicio = " + IdServicio.ToString();
-                db.Execute(query);
-                return true;
-            }
-        }
-
-        public bool DesacerBorradoLogicoServicio(int IdServicio)
-        {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
-            {
-                string query = "UPDATE servicios SET Borrado = 0 WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query);
                 return true;
             }

@@ -7,22 +7,22 @@ namespace GestorEventos.WebAdmin.Controllers
 {
 	public class ServiciosController : Controller
 	{
+
 		// GET: ServiciosController
 		public ActionResult Index()
 		{
-			ServicioService servicioService = new ServicioService();
+			ServicioDeServicios sServicios = new ServicioDeServicios(); 
 //			servicioService.GetServicios();
 
-			return View(servicioService.GetServicios());
+			return View(sServicios.ObtenerServicios());
 		}
 
 		// GET: ServiciosController/Details/5
 		public ActionResult Details(int id)
 		{
-			ServicioService servicioService = new ServicioService(); 
+            ServicioDeServicios sServicios = new ServicioDeServicios();
 
-
-			return View(servicioService.GetServiciosPorId(id));
+            return View(sServicios.ObtenerServicioId(id));
 		}
 
 		// GET: ServiciosController/Create
@@ -38,17 +38,18 @@ namespace GestorEventos.WebAdmin.Controllers
 		{
 			try
 			{
-				ServicioService servicioService = new ServicioService();
+                ServicioDeServicios sServicios = new ServicioDeServicios();
 
-				Servicio servicio = new Servicio();
+                Servicio servicio = new Servicio();
 
 				servicio.Descripcion = collection["Descripcion"].ToString();
 				servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
 
 
-				servicioService.AgregarNuevoServicio(servicio);
+				sServicios.AgregarServicio(servicio);
 
-				return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Index));
 			}
 			catch
 			{
@@ -59,10 +60,10 @@ namespace GestorEventos.WebAdmin.Controllers
 		// GET: ServiciosController/Edit/5
 		public ActionResult Edit(int id)
 		{
-            ServicioService servicioService = new ServicioService();
+            ServicioDeServicios sServicios = new ServicioDeServicios();
 
 
-            return View(servicioService.GetServiciosPorId(id));
+            return View(sServicios.ObtenerServicioId(id));
         }
 
 		// POST: ServiciosController/Edit/5
@@ -72,15 +73,15 @@ namespace GestorEventos.WebAdmin.Controllers
 		{
 			try
 			{
-				ServicioService servicioService = new ServicioService();
+                ServicioDeServicios sServicios = new ServicioDeServicios();
 
-				Servicio servicio = new Servicio();
+                Servicio servicio = new Servicio();
 
 				servicio.IdServicio = int.Parse(collection["IdServicio"].ToString());
 				servicio.Descripcion = collection["Descripcion"].ToString();
 				servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
 
-				servicioService.ModificarServicio(id, servicio);
+				sServicios.ModificarServicio(id, servicio);
 
 				return RedirectToAction(nameof(Index));
 			}
@@ -94,9 +95,9 @@ namespace GestorEventos.WebAdmin.Controllers
 		public ActionResult Delete(int id)
 		{
 
-            ServicioService servicioService = new ServicioService();
+            ServicioDeServicios sServicios = new ServicioDeServicios();
 
-			Servicio servicio = servicioService.GetServiciosPorId(id);
+			Servicio servicio = sServicios.ObtenerServicioId(id); 
 
             return View(servicio);
         }
@@ -108,9 +109,9 @@ namespace GestorEventos.WebAdmin.Controllers
 		{
 			try
 			{
-				ServicioService servicioService = new ServicioService();
+                ServicioDeServicios sServicios = new ServicioDeServicios();
 
-				servicioService.BorrarLogicamenteServicio(id);
+				sServicios.BorradoLogicoServicio(id);
 
 				return RedirectToAction(nameof(Index));
 			}

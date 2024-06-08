@@ -1,4 +1,6 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿using Dapper;
+using GestorEventos.Servicios.Entidades;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,51 +9,87 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServicioProvincia
+    public interface IServicioProvincia
+    {
+        bool AgregarProvincia(Provincia provincia);
+        bool BorradoFisicoProvincia(int IdProvincia);
+        bool BorradoLogicoProvincia(int IdProvincia);
+        bool ModificarProvincia(int IdProvincia, Provincia provincia);
+        IEnumerable<Provincia> ObtenerProvincia();
+        Provincia ObtenerProvinciaId(int IdProvincia);
+    }
+
+    public class ServicioProvincia : IServicioProvincia
     {
 
-        public IEnumerable<Provincia> Provincias { get; set; }
+        private string _connectionString;
 
         public ServicioProvincia()
         {
-
-            Provincias = new List<Provincia>
-            {
-
-
-                new Provincia
-                {
-                    IdProvincia = 1
-                },
-                new Provincia
-                {
-                    IdProvincia = 2
-                }
-
-
-
-            };
-
-
-        }
-        public IEnumerable<Provincia> Get()
-        {
-            return Provincias;
+            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
-        public Provincia GetProvinciaId(int IdProvincia)
+
+        public IEnumerable<Provincia> ObtenerProvincia()
         {
-            try
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                Provincia provincia = Provincias.Where(x => x.IdProvincia == IdProvincia).First();
+                List<Provincia> servicios = db.Query<Provincia>("").ToList();
+                return servicios;
+            }
+        }
+
+        public Provincia ObtenerProvinciaId(int IdProvincia)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                Provincia provincia = db.Query<Provincia>("" + IdProvincia.ToString()).First();
                 return provincia;
             }
-            catch (Exception ex)
+        }
+
+
+
+        public bool AgregarProvincia(Provincia provincia)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                return null;
+                string query = "";
+                db.Execute(query, provincia);
+                return true;
+            }
+
+        }
+
+        public bool ModificarProvincia(int IdProvincia, Provincia provincia)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdProvincia.ToString();
+                db.Execute(query, provincia);
+                return true;
             }
         }
 
+        public bool BorradoLogicoProvincia(int IdProvincia)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdProvincia.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
+
+        public bool BorradoFisicoProvincia(int IdProvincia)
+        {
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            {
+                string query = "" + IdProvincia.ToString();
+                db.Execute(query);
+                return true;
+            }
+        }
 
     }
 }

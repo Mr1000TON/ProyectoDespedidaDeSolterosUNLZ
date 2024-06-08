@@ -24,7 +24,7 @@ namespace GestorDespedidasDeSoltero.Controllers
         }
 
         [HttpGet("ObtenerServicio/{IdServicio:int}")]
-        public IActionResult ServicioId(int IdServicio)
+        public IActionResult ObtenerServicioId(int IdServicio)
         {
             Servicio servicios = sServicio.ObtenerServicioId(IdServicio);
 
@@ -51,19 +51,11 @@ namespace GestorDespedidasDeSoltero.Controllers
         }
 
         [HttpPatch("BorradoLogicoServicio/{IdServicio:int}")]
-        public IActionResult BorradoLogicoPersona(int IdServicio)
+        public IActionResult BorradoLogicoSerivicio(int IdServicio)
         {
             sServicio.BorradoLogicoServicio(IdServicio);
             return Ok(); 
         }
-
-        [HttpPatch("DesacerBorradoLogicoServicio/{IdServicio:int}")]
-        public IActionResult DesacerBorradoLogicoServicio(int IdServicio)
-        {
-            sServicio.DesacerBorradoLogicoServicio(IdServicio);
-            return Ok(); 
-        }
-
 
         [HttpDelete("BorrardoFisicoServicio/{IdServicio:int}")]
         public IActionResult BorrarServicio(int IdServicio)

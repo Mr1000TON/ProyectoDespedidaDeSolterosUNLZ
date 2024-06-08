@@ -8,24 +8,57 @@ namespace GestorDespedidasDeSoltero.Controllers
     [Route("[controller]")]
     public class ControladorProvincia : Controller
     {
-        [HttpGet]
-        public IActionResult Get()
+        private IServicioProvincia sProvincia;
+
+        public ControladorProvincia(IServicioProvincia _sProvincia)
         {
-            ServicioProvincia sPorvincia = new ServicioProvincia(); 
-            return Ok(sPorvincia.Get());
+            sProvincia = _sProvincia;
         }
 
-        [HttpGet("{IdProvincia:int}")]
-        public IActionResult GetProvinciaId(int IdProvincia)
+        [HttpGet("ObtenerProvincia")]
+        public IActionResult ObtenerProvincia()
         {
-            ServicioProvincia sProvincia = new ServicioProvincia();
-            Provincia provincia = sProvincia.GetProvinciaId(IdProvincia);
+            return Ok(sProvincia.ObtenerProvincia());
+        }
+
+        [HttpGet("ObtenerProvincia/{IdProvincia:int}")]
+        public IActionResult ObtenerProvinciaId(int IdProvincia)
+        {
+            Provincia provincia = sProvincia.ObtenerProvinciaId(IdProvincia);
 
             if (provincia == null)
                 return NotFound();
             else
-                return Ok(provincia); 
+                return Ok(provincia);
 
+        }
+
+        [HttpPost("AgregarProvincia")]
+        public IActionResult AgregarProvincia([FromBody] Provincia provincia)
+        {
+            sProvincia.AgregarProvincia(provincia);
+            return Ok();
+        }
+
+        [HttpPut("ModificarProvincia/{IdProvincia:int}")]
+        public IActionResult ModificarProvincia(int IdProvincia, [FromBody] Provincia provincia)
+        {
+            sProvincia.ModificarProvincia(IdProvincia, provincia);
+            return Ok();
+        }
+
+        [HttpPatch("BorradoLogicoProvincia/{IdProvincia:int}")]
+        public IActionResult BorradoLogicoSerivicio(int IdProvincia)
+        {
+            sProvincia.BorradoLogicoProvincia(IdProvincia);
+            return Ok();
+        }
+
+        [HttpDelete("BorrardoFisicoProvincia/{IdProvincia:int}")]
+        public IActionResult BorrarServicio(int IdProvincia)
+        {
+            sProvincia.BorradoFisicoProvincia(IdProvincia);
+            return Ok();
         }
 
     }

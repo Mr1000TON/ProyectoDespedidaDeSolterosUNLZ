@@ -8,28 +8,58 @@ namespace GestorDespedidasDeSoltero.Controllers
     [Route("[controller]")]
     public class ControladorEvento : Controller
     {
-        [HttpGet]
-        public IActionResult Get()
+
+        private IServicioEventos sEventos;
+
+        public ControladorEvento(IServicioEventos _sEventos)
         {
-            ServicioEventos sEventos = new ServicioEventos();
-            return Ok(sEventos.Get());
+            sEventos = _sEventos;
         }
 
-        [HttpGet("{IdEvento:int}")]
-        public IActionResult GetIdEvento(int IdEvento)
+        [HttpGet("ObtenerEventos")]
+        public IActionResult ObtenerEventos()
         {
-            ServicioEventos sEvento = new ServicioEventos();
-            Evento eventos = sEvento.GetEventoId(IdEvento);
+            return Ok(sEventos.ObtenerEventos());
+        }
 
-            if (eventos == null)
+        [HttpGet("ObtenerEventosId/{IdEvento:int}")]
+        public IActionResult ObtenerEventosId(int IdEvento)
+        {
+            Evento evento = sEventos.ObtenerEventosId(IdEvento);
+
+            if (evento == null)
                 return NotFound();
             else
-                return Ok(eventos);
-
+                return Ok(evento);
         }
 
+        [HttpPost("AgregarEvento")]
+        public IActionResult AgregarEvento([FromBody] Evento evento)
+        {
+            sEventos.AgregarEvento(evento);
+            return Ok();
+        }
 
+        [HttpPut("ModificarEvento/{IdEvento:int}")]
+        public IActionResult ModificarEvento(int IdEvento, [FromBody] Evento evento)
+        {
+            sEventos.ModificarEvento(IdEvento, evento);
+            return Ok();
+        }
 
+        [HttpPatch("BorradoLogicoEvento/{IdEvento:int}")]
+        public IActionResult BorradoLogicoEvento(int IdEvento)
+        {
+            sEventos.BorradoLogicoEvento(IdEvento);
+            return Ok();
+        }
+
+        [HttpDelete("BorradoFisicoEvento/{IdEvento:int}")]
+        public IActionResult BorradoFisicoServicios(int IdEvento)
+        {
+            sEventos.BorradoFisicoEvento(IdEvento);
+            return Ok();
+        }
 
     }
 }

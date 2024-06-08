@@ -22,7 +22,7 @@ namespace GestorDespedidasDeSoltero.Controllers
             return Ok(sPersonas.ObtenerPersonas());
         }
 
-        [HttpGet("ObtenerIdPersona/{IdPersona:int}")]
+        [HttpGet("ObtenerPersona/{IdPersona:int}")]
 
         public IActionResult GetId(int IdPersona)
         {
@@ -39,7 +39,7 @@ namespace GestorDespedidasDeSoltero.Controllers
         public IActionResult AgregarPersona([FromBody] Personas personas)
         {
             sPersonas.AgregarPersona(personas);
-            return Ok();
+            return Ok(new {exito = true, mensaje = "Persona creada"});
         }
 
         [HttpPut("ModificarPersna/{IdPersona:int}")]

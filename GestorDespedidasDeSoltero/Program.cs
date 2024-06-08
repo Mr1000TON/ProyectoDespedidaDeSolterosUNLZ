@@ -13,6 +13,10 @@ builder.Services.AddScoped<IServicioDeServicios, ServicioDeServicios>();
 
 builder.Services.AddScoped<IServicioPersonas, ServicioPersonas>();
 
+builder.Services.AddScoped<IServicioEventos, ServicioEventos>();
+
+builder.Services.AddScoped<IServicioProvincia, ServicioProvincia>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAnyOrigin", builder =>

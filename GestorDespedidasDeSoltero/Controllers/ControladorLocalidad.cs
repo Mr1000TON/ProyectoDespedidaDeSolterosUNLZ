@@ -9,29 +9,57 @@ namespace GestorDespedidasDeSoltero.Controllers
     [Route("[controller]")]
     public class ControladorLocalidad : Controller
     {
-        [HttpGet]
-        public IActionResult Index()
+        private IServicioLocalidad sLocalidad;
+
+        public ControladorLocalidad(IServicioLocalidad _sLocalidad)
         {
-
-            ServicioLocalidad sLocalidad = new ServicioLocalidad();
-            return Ok(sLocalidad.Get());
-
+            sLocalidad = _sLocalidad;
         }
 
-        [HttpGet("{IdLocalidad:int}")]
-        public IActionResult GetLocalidadId(int IdLocalidad)
+        [HttpGet("ObtenerLocalidad")]
+        public IActionResult ObtenerLocalidad()
         {
-            ServicioLocalidad sLocalidad = new ServicioLocalidad(); 
-            Localidad localidad = sLocalidad.GetLocalidadId(IdLocalidad);
+            return Ok(sLocalidad.ObtenerLocalidad());
+        }
 
+        [HttpGet("ObtenerLocalidad/{IdLocalidad:int}")]
+        public IActionResult ObtenerProvinciaId(int IdLocalidad)
+        {
+            Localidad localidad = sLocalidad.ObtenerLocalidadId(IdLocalidad);
 
-            if (localidad == null) 
+            if (localidad == null)
                 return NotFound();
-            else 
+            else
                 return Ok(localidad);
 
-
         }
 
+        [HttpPost("AgregarLocalidad")]
+        public IActionResult AgregarLocalidad([FromBody] Localidad localidad)
+        {
+            sLocalidad.AgregarLocalidad(localidad);
+            return Ok();
+        }
+
+        [HttpPut("ModificarLocalidad/{IdLocalidad:int}")]
+        public IActionResult ModificarLocalidad(int IdLocalidad, [FromBody] Localidad localidad)
+        {
+            sLocalidad.ModificarLocalidad(IdLocalidad, localidad);
+            return Ok();
+        }
+
+        [HttpPatch("BorradoLogicoLocalidad/{IdLocalidad:int}")]
+        public IActionResult BorradoLogicoLocalidad(int IdLocalidad)
+        {
+            sLocalidad.BorradoLogicoLocalidad(IdLocalidad);
+            return Ok();
+        }
+
+        [HttpDelete("BorrardoFisicoLocalidad/{IdLocalidad:int}")]
+        public IActionResult BorrardoFisicoLocalidad(int IdLocalidad)
+        {
+            sLocalidad.BorradoFisicoLocalidad(IdLocalidad);
+            return Ok();
+        }
     }
 }

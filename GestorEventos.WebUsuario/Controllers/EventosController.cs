@@ -9,10 +9,10 @@ namespace GestorEventos.WebUsuario.Controllers
     [Authorize]
     public class EventosController : Controller
     {
-        private IEventoService eventoService;
+        private IServicioEventos eventoService;
         private IPersonaService personaService;
 
-        public EventosController(IEventoService _eventoService, IPersonaService _personaService)
+        public EventosController(IServicioEventos _eventoService, IPersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
