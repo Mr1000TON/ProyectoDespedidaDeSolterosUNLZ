@@ -24,7 +24,7 @@ namespace GestorDespedidasDeSoltero.Controllers
             if (eventos == null)
                 return NotFound();
             else
-                return Ok(eventos); 
+                return Ok(eventos);
 
         }
 

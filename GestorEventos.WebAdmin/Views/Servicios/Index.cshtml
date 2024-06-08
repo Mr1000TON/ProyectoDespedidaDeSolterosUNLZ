@@ -22,9 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PrecioServicio)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Borrado)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -41,12 +38,9 @@
                 @Html.DisplayFor(modelItem => item.PrecioServicio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Borrado)
-            </td>
-            <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.IdServicio }) |
-                @Html.ActionLink("Details", "Details", new { id=item.IdServicio}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.IdServicio })
+                    @Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdServicio })
             </td>
         </tr>
 }

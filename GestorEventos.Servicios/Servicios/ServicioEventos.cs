@@ -41,8 +41,6 @@ namespace GestorEventos.Servicios.Servicios
             };
         }
 
-
-
         public IEnumerable<Evento> Get()
         {
             return Evento;
@@ -60,9 +58,5 @@ namespace GestorEventos.Servicios.Servicios
                 return null;
             }
         }
-
-
-
-
     }
 }

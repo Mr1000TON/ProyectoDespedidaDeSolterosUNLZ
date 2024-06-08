@@ -5,108 +5,119 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestorEventos.WebAdmin.Controllers
 {
-    public class ServiciosController : Controller
-    {
-        // GET: ControladorServicios
-        public ActionResult Index()
-        {
-            ServicioDeServicios sServicios = new ServicioDeServicios();
-            return View(sServicios.ObtenerServicios());
+	public class ServiciosController : Controller
+	{
+		// GET: ServiciosController
+		public ActionResult Index()
+		{
+			ServicioService servicioService = new ServicioService();
+//			servicioService.GetServicios();
+
+			return View(servicioService.GetServicios());
+		}
+
+		// GET: ServiciosController/Details/5
+		public ActionResult Details(int id)
+		{
+			ServicioService servicioService = new ServicioService(); 
+
+
+			return View(servicioService.GetServiciosPorId(id));
+		}
+
+		// GET: ServiciosController/Create
+		public ActionResult Create()
+		{
+			return View();
+		}
+
+		// POST: ServiciosController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Create(IFormCollection collection)
+		{
+			try
+			{
+				ServicioService servicioService = new ServicioService();
+
+				Servicio servicio = new Servicio();
+
+				servicio.Descripcion = collection["Descripcion"].ToString();
+				servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
+
+
+				servicioService.AgregarNuevoServicio(servicio);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
+
+		// GET: ServiciosController/Edit/5
+		public ActionResult Edit(int id)
+		{
+            ServicioService servicioService = new ServicioService();
+
+
+            return View(servicioService.GetServiciosPorId(id));
         }
 
-        // GET: ControladorServicios/Details/5
-        public ActionResult Details(int id)
-        {
-            ServicioDeServicios sServicio = new ServicioDeServicios();
-            return View(sServicio.ObtenerServicioId(id));
-        }
+		// POST: ServiciosController/Edit/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit(int id, IFormCollection collection)
+		{
+			try
+			{
+				ServicioService servicioService = new ServicioService();
 
-        // GET: ControladorServicios/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+				Servicio servicio = new Servicio();
 
-        // POST: ControladorServicios/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
+				servicio.IdServicio = int.Parse(collection["IdServicio"].ToString());
+				servicio.Descripcion = collection["Descripcion"].ToString();
+				servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
 
-                ServicioDeServicios sServicios = new ServicioDeServicios();
-                Servicio servicio = new Servicio();
+				servicioService.ModificarServicio(id, servicio);
 
-                servicio.Descripcion = collection["Descripcion"].ToString();
-                servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
 
-                sServicios.AgregarServicio(servicio);
+		// GET: ServiciosController/Delete/5
+		public ActionResult Delete(int id)
+		{
 
+            ServicioService servicioService = new ServicioService();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ControladorServicios/Edit/5
-        public ActionResult Edit(int id)
-        {
-            ServicioDeServicios sServicio = new ServicioDeServicios();
-            return View(sServicio.ObtenerServicioId(id));
-        }
-
-        // POST: ControladorServicios/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                ServicioDeServicios sServicios = new ServicioDeServicios();
-                Servicio servicio = new Servicio();
-
-                servicio.IdServicio = int.Parse(collection["IdServicio"].ToString());
-                servicio.Descripcion = collection["Descripcion"].ToString();
-                servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
-
-                sServicios.ModificarServicio(id,servicio);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ControladorServicios/Delete/5
-        public ActionResult Delete(int id)
-        {
-            ServicioDeServicios sServicio = new ServicioDeServicios();
-
-            Servicio servicio = sServicio.ObtenerServicioId(id);
+			Servicio servicio = servicioService.GetServiciosPorId(id);
 
             return View(servicio);
         }
 
-        // POST: ControladorServicios/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                ServicioDeServicios sServicio = new ServicioDeServicios();
-                sServicio.BorradoLogicoServicio(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+		// POST: ServiciosController/Delete/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Delete(int id, IFormCollection collection)
+		{
+			try
+			{
+				ServicioService servicioService = new ServicioService();
+
+				servicioService.BorrarLogicamenteServicio(id);
+
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
+	}
 }

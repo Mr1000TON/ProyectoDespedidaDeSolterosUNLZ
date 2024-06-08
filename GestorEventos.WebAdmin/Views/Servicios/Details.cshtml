@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Servicios</h4>
+    <h4>Servicio</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -29,15 +29,9 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PrecioServicio)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Borrado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Borrado)
-        </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.IdServicio  }) |
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.IdServicio }) |
     <a asp-action="Index">Back to List</a>
 </div>
