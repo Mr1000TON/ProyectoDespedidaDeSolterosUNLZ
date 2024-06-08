@@ -3,6 +3,8 @@ using GestorEventos.Servicios.Entidades;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +27,15 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioLocalidad()
         {
-            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
 
         public IEnumerable<Localidad> ObtenerLocalidad()
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<Localidad> localidad = db.Query<Localidad>("").ToList();
                 return localidad;
@@ -40,7 +44,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public Localidad ObtenerLocalidadId(int IdLocalidad)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 Localidad localidad = db.Query<Localidad>("" + IdLocalidad.ToString()).First();
                 return localidad;
@@ -51,7 +56,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool AgregarLocalidad(Localidad localidad)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "";
                 db.Execute(query, localidad);
@@ -62,7 +68,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool ModificarLocalidad(int IdLocalidad, Localidad localidad)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "" + IdLocalidad.ToString();
                 db.Execute(query, localidad);
@@ -72,7 +79,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoLogicoLocalidad(int IdLocalidad)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "" + IdLocalidad.ToString();
                 db.Execute(query);
@@ -82,7 +90,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoFisicoLocalidad(int IdLocalidad)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "" + IdLocalidad.ToString();
                 db.Execute(query);

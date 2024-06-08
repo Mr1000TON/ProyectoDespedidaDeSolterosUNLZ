@@ -8,14 +8,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<IServicioDeServicios, ServicioDeServicios>();
-
 builder.Services.AddScoped<IServicioPersonas, ServicioPersonas>();
-
 builder.Services.AddScoped<IServicioEventos, ServicioEventos>();
-
 builder.Services.AddScoped<IServicioProvincia, ServicioProvincia>();
+builder.Services.AddScoped<IServicioTiposDeEventos, ServicioTiposDeEventos>();
+builder.Services.AddScoped<IServicioLocalidad, ServicioLocalidad>();
 
 builder.Services.AddCors(options =>
 {

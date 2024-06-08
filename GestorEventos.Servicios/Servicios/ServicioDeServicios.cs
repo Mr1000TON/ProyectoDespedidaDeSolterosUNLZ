@@ -3,6 +3,8 @@ using GestorEventos.Servicios.Entidades;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +28,15 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioDeServicios()
         {
-            //JUAN _connectionString = "Data Source=Jimi-Floyd\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
-            /*MILTON*/ _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
 
         public IEnumerable<Servicio> ObtenerServicios()
         {
-            //using (IDbConnection db = new SqlConnection(_connectionString))
-
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 List<Servicio> servicios = db.Query<Servicio>("SELECT * FROM servicios WHERE Borrado = 0").ToList();
                 return servicios;
@@ -44,7 +45,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public Servicio ObtenerServicioId(int IdServicio)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 Servicio servicios = db.Query<Servicio>("SELECT * FROM servicios WHERE IdServicio = " + IdServicio.ToString()).First();
                 return servicios;
@@ -55,7 +57,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool AgregarServicio(Servicio servicios)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "INSERT INTO servicios(IdServicio, Descripcion, PrecioServicio, Borrado) VALUES(@IdServicio, @Descripcion, @PrecioServicio, @Borrado)";
                 db.Execute(query, servicios);
@@ -66,7 +69,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool ModificarServicio(int IdServicio, Servicio servicios)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "UPDATE servicios SET Descripcion = @Descripcion, PrecioServicio = @PrecioServicio WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query, servicios);
@@ -76,7 +80,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoLogicoServicio(int IdServicio)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "UPDATE servicios SET Borrado = 1 WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query);
@@ -86,7 +91,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoFisicoServicio(int IdServicio)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "DELETE FROM servicios WHERE IdServicio = " + IdServicio.ToString();
                 db.Execute(query);

@@ -1,54 +1,50 @@
 ﻿using GestorEventos.Servicios.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class ServicioTiposDeEventos
+    public interface IServicioTiposDeEventos
     {
+        IEnumerable<TipoEvento> GetTipoEventos();
+        TipoEvento GetTipoEventoId(int IdEvento);
 
-
-        public IEnumerable<TipoEvento> TipoEventos { get; set;}
+    }
+    public class ServicioTiposDeEventos : IServicioTiposDeEventos
+    {
+        private string _connectionString;
 
         public ServicioTiposDeEventos()
         {
-            TipoEventos = new List<TipoEvento>
-            {
-                new TipoEvento
-                {
-                    IdTipoEvento = 1,
-                    Descripcion = "Despedida de Solteros"
-                },
-
-                new TipoEvento
-                {
-                    IdTipoEvento = 2,
-                    Descripcion = "Despedida de Solteras"
-                }
-            };
+            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
 
         public IEnumerable<TipoEvento> GetTipoEventos()
         {
-            return this.TipoEventos; 
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                List<TipoEvento> evento = db.Query<TipoEvento>("SELECT * FROM TiposEventos WHERE Borrado = 0").ToList();
+                return evento;
+            }
         }
 
         public TipoEvento GetTipoEventoId(int IdEvento)
         {
-            try
+            // using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                TipoEvento evento = TipoEventos.Where(x => x.IdTipoEvento == IdEvento).First(); 
+                TipoEvento evento = db.Query<TipoEvento>("SELECT * FROM TiposEventos WHERE IdTipoEvento = " + IdEvento.ToString()).First();
                 return evento;
             }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
-
     }
 }

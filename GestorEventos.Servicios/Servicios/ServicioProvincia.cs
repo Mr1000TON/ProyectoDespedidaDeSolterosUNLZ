@@ -3,6 +3,8 @@ using GestorEventos.Servicios.Entidades;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +28,15 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioProvincia()
         {
-            _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
 
         public IEnumerable<Provincia> ObtenerProvincia()
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 List<Provincia> servicios = db.Query<Provincia>("").ToList();
                 return servicios;
@@ -41,7 +45,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public Provincia ObtenerProvinciaId(int IdProvincia)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 Provincia provincia = db.Query<Provincia>("" + IdProvincia.ToString()).First();
                 return provincia;
@@ -52,7 +57,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool AgregarProvincia(Provincia provincia)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "";
                 db.Execute(query, provincia);
@@ -63,7 +69,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool ModificarProvincia(int IdProvincia, Provincia provincia)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "" + IdProvincia.ToString();
                 db.Execute(query, provincia);
@@ -73,7 +80,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoLogicoProvincia(int IdProvincia)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "" + IdProvincia.ToString();
                 db.Execute(query);
@@ -83,7 +91,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool BorradoFisicoProvincia(int IdProvincia)
         {
-            using (MySqlConnection db = new MySqlConnection(_connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 string query = "" + IdProvincia.ToString();
                 db.Execute(query);
