@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<IEventoService, EventoService>();
-builder.Services.AddScoped<IPersonaService, PersonaService>();
+builder.Services.AddScoped<IServicioPersonas, ServicioPersonas>();
+builder.Services.AddScoped<IServicioEventos, ServicioEventos>();
 
 var app = builder.Build();
 
