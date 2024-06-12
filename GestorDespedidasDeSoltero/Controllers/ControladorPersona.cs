@@ -42,7 +42,7 @@ namespace GestorDespedidasDeSoltero.Controllers
             return Ok(new {exito = true, mensaje = "Persona creada"});
         }
 
-        [HttpPut("ModificarPersna/{IdPersona:int}")]
+        [HttpPut("ModificarPersona/{IdPersona:int}")]
         public IActionResult ModificarPersona(int IdPersona, Personas personas)
         {
             sPersonas.ModificarPersona(IdPersona, personas);
