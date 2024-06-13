@@ -15,6 +15,10 @@ namespace GestorEventos.Servicios.Entidades
         public string Apellido {  get; set; }
         public string Telefono {  get; set; }
         public string Email {  get; set; }
+        public string DireccionCalle { get; set; }
+        public string DireccionNumero { get; set; }
+        public string DireccionPiso { get; set; }
+        public string DireccionDepartamento { get; set; }
         public bool Borrado { get; set;  }
 
     }

@@ -31,9 +31,10 @@
             public ServicioPersonas()
             {
 
-                _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
-                // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
-                //"Password=admin;Persist Security Info=True;User ID=root;Initial Catalog=db_py_unlz;Data Source=MYSQL";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+                                    //"Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+                                    // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+                                    //"Password=admin;Persist Security Info=True;User ID=root;Initial Catalog=db_py_unlz;Data Source=MYSQL";
             }
             public IEnumerable<Personas> ObtenerPersonas()
             {
@@ -65,7 +66,7 @@
                 // using (MySqlConnection db = new MySqlConnection(_connectionString))
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO personas(Nombre,Apellido,Email,Telefono) VALUES(@Nombre,@Apellido,@Email,@Telefono)";
+                    string query = "INSERT INTO personas(Nombre,Apellido,Email,Telefono, DireccionCalle, DireccionNumero, DireccionPiso, DireccionDepartamento) VALUES(@Nombre,@Apellido,@Email,@Telefono,@DireccionCalle,@DireccionNumero,@DireccionPiso,@DireccionDepartamento)";
                     db.Execute(query, personas);
                     return true;
                 }
@@ -76,7 +77,7 @@
                 // using (MySqlConnection db = new MySqlConnection(_connectionString))
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    string query = "UPDATE personas SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono WHERE IdPersona = " + IdPersona.ToString();
+                    string query = "UPDATE personas SET Nombre = @Nombre, Apellido = @Apellido, Email = @Email, Telefono = @Telefono, DireccionCalle = @DireccionCalle, DireccionNumero = @DireccionNumero, DireccionPiso = @DireccionPiso, DireccionDepartamento = @DireccionDepartamento WHERE IdPersona = " + IdPersona.ToString();
                     db.Execute(query, personas);
                     return true;
                 }
