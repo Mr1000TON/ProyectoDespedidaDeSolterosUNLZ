@@ -28,15 +28,17 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioDeServicios()
         {
-            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
-            // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
+            //_connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+
+           
+            _connectionString = "server=localhost; database=db_py_unlz; Uid=root; password=;";
         }
 
 
         public IEnumerable<Servicio> ObtenerServicios()
         {
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            //using (MySqlConnection db = new MySqlConnection(_connectionString))
+           // using (IDbConnection db = new SqlConnection(_connectionString))
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 List<Servicio> servicios = db.Query<Servicio>("SELECT * FROM servicios WHERE Borrado = 0").ToList();
                 return servicios;
@@ -45,8 +47,8 @@ namespace GestorEventos.Servicios.Servicios
 
         public Servicio ObtenerServicioId(int IdServicio)
         {
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            //using (MySqlConnection db = new MySqlConnection(_connectionString))
+           // using (IDbConnection db = new SqlConnection(_connectionString))
+            using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
                 Servicio servicios = db.Query<Servicio>("SELECT * FROM servicios WHERE IdServicio = " + IdServicio.ToString()).First();
                 return servicios;
