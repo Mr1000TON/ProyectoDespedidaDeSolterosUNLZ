@@ -11,7 +11,7 @@ document.getElementById('fetchServicios').addEventListener('click', () => {
             const serviciosList = document.createElement('ul');
             data.forEach(servicio => {
                 const servicioItem = document.createElement('li');
-                servicioItem.textContent = `${servicio.idServicio} - ${servicio.descripcion}`;
+                servicioItem.textContent = `${servicio.idServicio} - ${servicio.descripcion} - $${servicio.precioServicio}`;
                 serviciosList.appendChild(servicioItem);
             });
             document.getElementById('resultServicios').innerHTML = '';
