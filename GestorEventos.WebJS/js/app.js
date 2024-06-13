@@ -7,13 +7,23 @@ document.getElementById('fetchServicios').addEventListener('click', () => {
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            console.log(data); // Verifica la estructura de data en la consola
             const serviciosList = document.createElement('ul');
             data.forEach(servicio => {
                 const servicioItem = document.createElement('li');
-                servicioItem.textContent = `${servicio.idServicio} - ${servicio.descripcion} - $${servicio.precioServicio}`;
+                servicioItem.textContent = `${servicio.idServicio} - ${servicio.descripcion}`;
+
+                // Crear un div para el precio del servicio
+                const precioDiv = document.createElement('div');
+                precioDiv.textContent = `$${servicio.precioServicio}`;
+                precioDiv.classList.add('precio-servicio'); // Agregar clase al div
+
+                // Agregar el div de precio como hijo del servicioItem
+                servicioItem.appendChild(precioDiv);
+
                 serviciosList.appendChild(servicioItem);
             });
+
             document.getElementById('resultServicios').innerHTML = '';
             document.getElementById('resultServicios').appendChild(serviciosList);
         })
