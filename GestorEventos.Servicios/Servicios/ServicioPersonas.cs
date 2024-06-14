@@ -14,7 +14,7 @@
         public interface IServicioPersonas
         {
             bool AgregarPersona(Personas personas);
-            bool BorradoFisicoPersona(int IdPersona);
+            //bool BorradoFisicoPersona(int IdPersona);
             bool BorradoLogicoPersona(int IdPersona);
             bool DesacerBorradoLogicoPersona(int IdPersona);
             bool ModificarPersona(int IdPersona, Personas personas);
@@ -31,7 +31,7 @@
             public ServicioPersonas()
             {
 
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+            _connectionString = "Password=Jimifloyd_22;Persist Security Info=True;User ID=Administrrador;Initial Catalog=DespedidaDeSolteros-DB;Data Source=despedidadesolteros-server.database.windows.net";
                                     //"Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
                                     // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
                                     //"Password=admin;Persist Security Info=True;User ID=root;Initial Catalog=db_py_unlz;Data Source=MYSQL";
@@ -66,7 +66,7 @@
                 // using (MySqlConnection db = new MySqlConnection(_connectionString))
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO personas(Nombre,Apellido,Email,Telefono, DireccionCalle, DireccionNumero, DireccionPiso, DireccionDepartamento) VALUES(@Nombre,@Apellido,@Email,@Telefono,@DireccionCalle,@DireccionNumero,@DireccionPiso,@DireccionDepartamento)";
+                    string query = "INSERT INTO personas(Nombre,Apellido,Email,Telefono, DireccionCalle, DireccionNumero, DireccionPiso, DireccionDepartamento, DireccionCodPostal) VALUES(@Nombre,@Apellido,@Email,@Telefono,@DireccionCalle,@DireccionNumero,@DireccionPiso,@DireccionDepartamento, @DireccionCodPostal)";
                     db.Execute(query, personas);
                     return true;
                 }
@@ -104,7 +104,7 @@
                     return true;
                 }
             }
-
+            /*       
             public bool BorradoFisicoPersona(int IdPersona)
             {
                 // using (MySqlConnection db = new MySqlConnection(_connectionString))
@@ -114,7 +114,7 @@
                     db.Execute(query);
                     return true;
                 }
-            }
+            }*/
 
         }
     }

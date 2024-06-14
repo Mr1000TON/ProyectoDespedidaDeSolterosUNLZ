@@ -14,7 +14,7 @@ namespace GestorEventos.Servicios.Servicios
     public interface IServicioLocalidad
     {
         bool AgregarLocalidad(Localidad localidad);
-        bool BorradoFisicoLocalidad(int IdLocalidad);
+        //bool BorradoFisicoLocalidad(int IdLocalidad);
         bool BorradoLogicoLocalidad(int IdLocalidad);
         bool ModificarLocalidad(int IdLocalidad, Localidad localidad);
         IEnumerable<Localidad> ObtenerLocalidad();
@@ -27,7 +27,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioLocalidad()
         {
-            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            _connectionString = "Password=Jimifloyd_22;Persist Security Info=True;User ID=Administrrador;Initial Catalog=DespedidaDeSolteros-DB;Data Source=despedidadesolteros-server.database.windows.net";
             // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
@@ -37,7 +37,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<Localidad> localidad = db.Query<Localidad>("").ToList();
+                List<Localidad> localidad = db.Query<Localidad>("SELECT * FROM Localidad WHERE Borrado = 0").ToList();
                 return localidad;
             }
         }
@@ -47,7 +47,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                Localidad localidad = db.Query<Localidad>("" + IdLocalidad.ToString()).First();
+                Localidad localidad = db.Query<Localidad>("SELECT * FROM Localidad WHERE IdLocalidad = " + IdLocalidad.ToString()).First();
                 return localidad;
             }
         }
@@ -59,7 +59,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "";
+                string query = "INSERT INTO Localidad (NombreLocalidad) VALUES (@NombreLocalidad)";
                 db.Execute(query, localidad);
                 return true;
             }
@@ -71,7 +71,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "" + IdLocalidad.ToString();
+                string query = "UPDATE Localidad SET NombreLocalidad = @NombreLocalidad WHERE IdPersona = " + IdLocalidad.ToString();
                 db.Execute(query, localidad);
                 return true;
             }
@@ -82,12 +82,12 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "" + IdLocalidad.ToString();
+                string query = "UPDATE Localidad SET Borrado = 1 WHERE IdLocalidad = " + IdLocalidad.ToString();
                 db.Execute(query);
                 return true;
             }
         }
-
+        /*
         public bool BorradoFisicoLocalidad(int IdLocalidad)
         {
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
@@ -97,7 +97,7 @@ namespace GestorEventos.Servicios.Servicios
                 db.Execute(query);
                 return true;
             }
-        }
+        }*/
 
     }
 }

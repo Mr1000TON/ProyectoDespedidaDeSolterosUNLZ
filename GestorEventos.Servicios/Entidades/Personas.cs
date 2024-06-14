@@ -19,6 +19,7 @@ namespace GestorEventos.Servicios.Entidades
         public string DireccionNumero { get; set; }
         public string DireccionPiso { get; set; }
         public string DireccionDepartamento { get; set; }
+        public string DireccionCodPostal { get; set; }
         public bool Borrado { get; set;  }
 
     }

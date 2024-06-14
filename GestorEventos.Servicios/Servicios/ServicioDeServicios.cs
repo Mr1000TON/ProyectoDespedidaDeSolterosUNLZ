@@ -14,7 +14,7 @@ namespace GestorEventos.Servicios.Servicios
     public interface IServicioDeServicios
     {
         bool AgregarServicio(Servicio servicios);
-        bool BorradoFisicoServicio(int IdServicio);
+        //bool BorradoFisicoServicio(int IdServicio);
         bool BorradoLogicoServicio(int IdServicio);
         bool ModificarServicio(int IdServicio, Servicio servicios);
         Servicio ObtenerServicioId(int IdServicio);
@@ -28,7 +28,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioDeServicios()
         {
-            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            _connectionString = "Password=Jimifloyd_22;Persist Security Info=True;User ID=Administrrador;Initial Catalog=DespedidaDeSolteros-DB;Data Source=despedidadesolteros-server.database.windows.net";
             // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
@@ -60,7 +60,7 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                string query = "INSERT INTO servicios(IdServicio, Descripcion, PrecioServicio, Borrado) VALUES(@IdServicio, @Descripcion, @PrecioServicio, @Borrado)";
+                string query = "INSERT INTO servicios(Descripcion, PrecioServicio) VALUES(@Descripcion, @PrecioServicio)";
                 db.Execute(query, servicios);
                 return true;
             }
@@ -88,7 +88,7 @@ namespace GestorEventos.Servicios.Servicios
                 return true;
             }
         }
-
+        /*
         public bool BorradoFisicoServicio(int IdServicio)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
@@ -98,7 +98,7 @@ namespace GestorEventos.Servicios.Servicios
                 db.Execute(query);
                 return true;
             }
-        }
+        }*/
 
     }
 }

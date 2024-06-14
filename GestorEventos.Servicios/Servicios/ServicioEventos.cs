@@ -14,7 +14,7 @@ namespace GestorEventos.Servicios.Servicios
     public interface IServicioEventos
     {
         bool AgregarEvento(Evento evento);
-        bool BorradoFisicoEvento(int IdEvento);
+       // bool BorradoFisicoEvento(int IdEvento);
         bool BorradoLogicoEvento(int IdEvento);
         bool ModificarEvento(int IdEvento, Evento evento);
         IEnumerable<Evento> ObtenerEventos();
@@ -28,7 +28,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioEventos()
         {
-            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            _connectionString = "Password=Jimifloyd_22;Persist Security Info=True;User ID=Administrrador;Initial Catalog=DespedidaDeSolteros-DB;Data Source=despedidadesolteros-server.database.windows.net";
             // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
@@ -38,8 +38,8 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<Evento> servicios = db.Query<Evento>("").ToList();
-                return servicios;
+                List<Evento> evento = db.Query<Evento>("SELECT * FROM eventos WHERE Borrado = 0").ToList();
+                return evento;
             }
         }
 
@@ -48,7 +48,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                Evento evento = db.Query<Evento>("" + IdEvento.ToString()).First();
+                Evento evento = db.Query<Evento>("SELECT * FROM personas WHERE IdEvento = " + IdEvento.ToString()).First();
                 return evento;
             }
         }
@@ -58,7 +58,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "";
+                string query = "INSERT INTO eventos (NombreEvento,FechaEvento,CantPersonas,IdPersonaAgasajada,IdPersonaContacto,IdTipoDespedida) VALUES (@NombreEvento,@FechaEvento,@CantPersonas,@IdPersonaAgasajada,@IdPersonaContacto,@IdTipoDespedida)";
                 db.Execute(query, evento);
                 return true;
             }
@@ -69,7 +69,7 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "" + IdEvento.ToString();
+                string query = "UPDATE eventos SET NombreEvento= @NombreEvento,FechaEvento=@FechaEvento,CantPersonas=@CantPersonas,IdPersonaAgasajada=@IdPersonaAgasajada,IdPersonaContacto=@IdPersonaContacto,IdTipoDespedida=@IdTipoDespedida WHERE IdEvento = " + IdEvento.ToString();
                 db.Execute(query, evento);
                 return true;
             }
@@ -80,12 +80,12 @@ namespace GestorEventos.Servicios.Servicios
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string query = "" + IdEvento.ToString();
+                string query = "UPDATE eventos SET borrado = 1 WHERE IdEvento = " + IdEvento.ToString();
                 db.Execute(query);
                 return true;
             }
         }
-
+        /*
         public bool BorradoFisicoEvento(int IdEvento)
         {
             // using (MySqlConnection db = new MySqlConnection(_connectionString))
@@ -95,7 +95,7 @@ namespace GestorEventos.Servicios.Servicios
                 db.Execute(query);
                 return true;
             }
-        }
+        }*/
 
     }
 }

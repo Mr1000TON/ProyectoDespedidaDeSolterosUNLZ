@@ -10,14 +10,13 @@ namespace GestorEventos.Servicios.Entidades
     {
 
         public int IdEvento { get; set; }
-        public int IdTipoDeDespedida { get; set; }
+        public int IdTipoDespedida { get; set; }
         public int IdPersonaAgasajada {  get; set; }
         public int IdPersonaContacto {  get; set; }
-        public string Nombre {  get; set; } 
-        public string FechaEvento {  get; set; }
+        public string NombreEvento {  get; set; } 
+        public DateTime FechaEvento {  get; set; }
         public int CantPersonas { get; set; }
         public bool Borrado { get; set; }
-
 
     }
 }
