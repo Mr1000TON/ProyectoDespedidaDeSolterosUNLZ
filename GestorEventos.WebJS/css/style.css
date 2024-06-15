@@ -179,6 +179,41 @@ header {
 /* Fin Header */
 
 /* Index Main *//* Index Main *//* Index Main */
+
+/* Botonera */
+.botoesFetch {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(7, 66, 51);
+    border-radius: 5px;
+    cursor: pointer;
+}
+#index_main_botonera{
+    margin-bottom: 1rem
+}
+#localidadForm{
+    margin-left: 10px;
+    align-items: center;
+    display: inline-flex;
+}
+#localidadForm label{
+    font-weight: 300;
+    margin-right: 5px;
+}
+#localidadForm input{
+    margin-right: 5px;
+    width: 2rem;
+    padding: 5px 3px;
+    border: 1px solid rgba(155, 149, 149, 0.418);
+
+    border-radius: 5px;
+}
+/* FIN Botonera */
+
 /* Resultados *//* Resultados */
 .resultados ul li {
     display: flex;
@@ -213,19 +248,8 @@ header {
 .resultados ul li:last-child {
     margin-bottom: 10px;
 }
-
-.botoesFetch {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: rgb(7, 66, 51);
-    border-radius: 5px;
-    cursor: pointer;
-}
 /* FIN Resultados *//* FIN Resultados */
+
 
 /*Formularios*/
 .formularios,
