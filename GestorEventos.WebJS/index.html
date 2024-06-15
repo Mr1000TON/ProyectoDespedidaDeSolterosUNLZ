@@ -46,10 +46,45 @@
         </nav>
     </header>
     <main id="index_main">
-    
+
         <div id="resultServicios"></div>
 
         <button id="fetchServicios"> fetchServicios </button>
+
+        <!-- Formularios de registro e inicio de sesión  --->
+        <br><br>
+
+        <form class="formularios" id="validacion_usuario">
+            <label>Nombre usuario</label>
+            <input type="text" name="usuario" required>
+            <label>Clave usuario</label>
+            <input type="password" name="clave" required>
+            <input type="submit" value="Ingesar">
+        </form>
+
+        <form class="formularios desactivado" id="registro_usuario">
+            <label>Nombre usuario</label>
+            <input type="text" name="usuario" required>
+            <label>Clave usuario</label>
+            <input type="password" name="clave" required>
+            <label>Repetir clave usuario</label>
+            <input type="password" name="clave_1" required>
+            <input type="submit" value="Registrar">
+        </form><br>
+        <!-- Parrafo auxiliar que avisa si hay algo mal en la clave/nombre de usuario/usuario registrado -->
+        <p class="aux desactivado"></p><br>
+        <!--                            -->
+        <!--
+        Estos "botones" se encargan de modificar el documento
+        para hacer aparecer o desaparecer los
+        formularios de registro o inicio de sesión
+        -->
+        <p class="inicio desactivado" id="btn_ini">Iniciar sesión</p>
+        <p class="registro" id="btn_reg">Registrarse</p>
+        <!--                                        -->
+        <!--//////////////////////////////////////////////-->
+
+
     </main>
     <script src="./js/app.js" async defer></script>
 </body>
