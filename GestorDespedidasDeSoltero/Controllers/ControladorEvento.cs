@@ -53,13 +53,13 @@ namespace GestorDespedidasDeSoltero.Controllers
             sEventos.BorradoLogicoEvento(IdEvento);
             return Ok();
         }
-
+        /*
         [HttpDelete("BorradoFisicoEvento/{IdEvento:int}")]
         public IActionResult BorradoFisicoServicios(int IdEvento)
         {
             sEventos.BorradoFisicoEvento(IdEvento);
             return Ok();
-        }
+        }*/
 
     }
 }

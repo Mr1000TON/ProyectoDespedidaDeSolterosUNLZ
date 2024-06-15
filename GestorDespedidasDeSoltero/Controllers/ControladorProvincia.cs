@@ -32,7 +32,7 @@ namespace GestorDespedidasDeSoltero.Controllers
                 return Ok(provincia);
 
         }
-
+        /*
         [HttpPost("AgregarProvincia")]
         public IActionResult AgregarProvincia([FromBody] Provincia provincia)
         {
@@ -59,7 +59,7 @@ namespace GestorDespedidasDeSoltero.Controllers
         {
             sProvincia.BorradoFisicoProvincia(IdProvincia);
             return Ok();
-        }
+        }*/
 
     }
 }

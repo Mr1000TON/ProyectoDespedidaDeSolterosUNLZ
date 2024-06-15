@@ -10,11 +10,7 @@ namespace GestorEventos.Servicios.Entidades
     {
 
         public int IdLocalidad { get; set; }
-        public string CodigoPostal {  get; set; }
-        public string Nombre { get; set; }
+        public string NombreLocalidad { get; set; }
         public bool Borrado { get; set; }
-
-
-
     }
 }

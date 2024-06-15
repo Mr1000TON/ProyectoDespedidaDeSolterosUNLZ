@@ -48,7 +48,7 @@ namespace GestorDespedidasDeSoltero.Controllers
             sPersonas.ModificarPersona(IdPersona, personas);
             return Ok();
         }
-
+        
         [HttpPatch("BorradoLogicoPersona/{IdPersona:int}")]
         public IActionResult BorradoLogicoPersona(int IdPersona)
         {
@@ -62,12 +62,12 @@ namespace GestorDespedidasDeSoltero.Controllers
             sPersonas.DesacerBorradoLogicoPersona(IdPersona);
             return Ok();
         }
-
+        /*
         [HttpDelete("BorradoFisicoPersona/{IdPersona:int}")]
         public IActionResult BorradoFisicoPersona(int IdPersona)
         {
             sPersonas.BorradoFisicoPersona(IdPersona);
             return Ok();
-        }
+        }*/
     }
 }

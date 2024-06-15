@@ -13,10 +13,10 @@ namespace GestorEventos.Servicios.Servicios
 {
     public interface IServicioProvincia
     {
-        bool AgregarProvincia(Provincia provincia);
+        /*bool AgregarProvincia(Provincia provincia);
         bool BorradoFisicoProvincia(int IdProvincia);
         bool BorradoLogicoProvincia(int IdProvincia);
-        bool ModificarProvincia(int IdProvincia, Provincia provincia);
+        bool ModificarProvincia(int IdProvincia, Provincia provincia);*/
         IEnumerable<Provincia> ObtenerProvincia();
         Provincia ObtenerProvinciaId(int IdProvincia);
     }
@@ -28,7 +28,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public ServicioProvincia()
         {
-            _connectionString = "Data Source=Jimi-Floyd\\SQLEXPRESS;Initial Catalog=BDDespedidas;User ID=sa;Password=12345678;Persist Security Info=True";
+            _connectionString = "Password=Jimifloyd_22;Persist Security Info=True;User ID=Administrrador;Initial Catalog=DespedidaDeSolteros-DB;Data Source=despedidadesolteros-server.database.windows.net";
             // _connectionString = "Server=localhost;Database=db_py_unlz;Uid=root;Pwd=admin;";
         }
 
@@ -38,8 +38,8 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                List<Provincia> servicios = db.Query<Provincia>("").ToList();
-                return servicios;
+                List<Provincia> provincia = db.Query<Provincia>("SELECT * FROM Provincia").ToList();
+                return provincia;
             }
         }
 
@@ -48,13 +48,13 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString))
             //using (MySqlConnection db = new MySqlConnection(_connectionString))
             {
-                Provincia provincia = db.Query<Provincia>("" + IdProvincia.ToString()).First();
+                Provincia provincia = db.Query<Provincia>("SELECT * FROM Provincia WHERE IdProvincia = " + IdProvincia.ToString()).First();
                 return provincia;
             }
         }
 
 
-
+        /*
         public bool AgregarProvincia(Provincia provincia)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
@@ -98,7 +98,7 @@ namespace GestorEventos.Servicios.Servicios
                 db.Execute(query);
                 return true;
             }
-        }
+        }*/
 
     }
 }

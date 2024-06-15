@@ -119,4 +119,24 @@ header {
     border-radius: 5px; 
     cursor: pointer;
 }
+
+
+/*Edicion formularios*/
+
+/* Centra los formulacios en pantalla */
+.formularios, p {
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+/*///////////////////////////////////*/
+
+/* Clase auxiliar que hace invisible algunas partes del documento HTML para dar dinamismo*/
+.desactivado {
+    display: none;
+}
+/*///////////////*/
+
+/*///////////////////*/
+
 /* Fin Index Main */

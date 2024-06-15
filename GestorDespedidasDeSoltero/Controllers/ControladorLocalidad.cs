@@ -54,12 +54,12 @@ namespace GestorDespedidasDeSoltero.Controllers
             sLocalidad.BorradoLogicoLocalidad(IdLocalidad);
             return Ok();
         }
-
+        /*
         [HttpDelete("BorrardoFisicoLocalidad/{IdLocalidad:int}")]
         public IActionResult BorrardoFisicoLocalidad(int IdLocalidad)
         {
             sLocalidad.BorradoFisicoLocalidad(IdLocalidad);
             return Ok();
-        }
+        }*/
     }
 }

@@ -56,13 +56,13 @@ namespace GestorDespedidasDeSoltero.Controllers
             sServicio.BorradoLogicoServicio(IdServicio);
             return Ok(); 
         }
-
+        /*
         [HttpDelete("BorrardoFisicoServicio/{IdServicio:int}")]
         public IActionResult BorrarServicio(int IdServicio)
         {
             sServicio.BorradoFisicoServicio(IdServicio);
             return Ok();
-        }
+        }*/
         
     }
 }

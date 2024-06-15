@@ -9,9 +9,6 @@ namespace GestorEventos.Servicios.Entidades
     public class Provincia
     {
         public int IdProvincia {  get; set; }
-        public string Nombre {  get; set; }
-        public bool Borrado { get; set; }
-
-
+        public string NombreProvincia {  get; set; }
     }
 }
