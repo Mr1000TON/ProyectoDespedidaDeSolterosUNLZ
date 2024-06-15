@@ -13,8 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -46,13 +48,25 @@
         </nav>
     </header>
     <main id="index_main">
+        <section id="index_main_botonera">
+            <button class="botoesFetch" data-url="https://localhost:7282/ControladorServicio/ObtenerServicios"
+                data-target="resultServicios" data-type="servicios">Obtener Servicios</button>
+            <button class="botoesFetch" data-url="https://localhost:7282/ControladorLocalidad/ObtenerLocalidad"
+                data-target="resultLocalidades" data-type="localidades">Obtener Localidades</button>
+            <form id="localidadForm">
+                <label for="idLocalidad">ID Localidad:</label>
+                <input type="text" id="idLocalidad" name="idLocalidad" required>
+                <button class="botoesFetch" type="submit">Obtener Localidad</button>
+            </form>
+        </section>
+        <section id="index_main_resultados">
+            <div class="resultados" id="resultLocalidades"></div>
+            <div class="resultados" id="resultLocalidad"></div>
+            <div class="resultados" id="resultServicios"></div>
+        </section>
 
-        <div id="resultServicios"></div>
-
-        <button id="fetchServicios"> fetchServicios </button>
-
-        <!-- Formularios de registro e inicio de sesión  --->
-        <br><br>
+        <!--  Nota: Comentado momentaneamente Formularios de registro e inicio de sesión  --->
+        <!--   <br><br>
 
         <form class="formularios" id="validacion_usuario">
             <label>Nombre usuario</label>
@@ -71,22 +85,20 @@
             <input type="password" name="clave_1" required>
             <input type="submit" value="Registrar">
         </form><br>
-        <!-- Parrafo auxiliar que avisa si hay algo mal en la clave/nombre de usuario/usuario registrado -->
+       Parrafo auxiliar que avisa si hay algo mal en la clave/nombre de usuario/usuario registrado
         <p class="aux desactivado"></p><br>
-        <!--                            -->
-        <!--
+       
         Estos "botones" se encargan de modificar el documento
         para hacer aparecer o desaparecer los
         formularios de registro o inicio de sesión
-        -->
+        
         <p class="inicio desactivado" id="btn_ini">Iniciar sesión</p>
         <p class="registro" id="btn_reg">Registrarse</p>
-        <!--                                        -->
-        <!--//////////////////////////////////////////////-->
-
-
+    -->
     </main>
     <script src="./js/app.js" async defer></script>
+
+
 </body>
 
 </html>

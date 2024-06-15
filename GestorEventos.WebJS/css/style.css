@@ -1,16 +1,84 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -19,8 +87,17 @@ time, mark, audio, video {
     vertical-align: baseline;
 }
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
     display: block;
 }
 
@@ -31,16 +108,20 @@ body {
     font-style: normal;
 }
 
-ol, ul {
+ol,
+ul {
     list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
     quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
     content: '';
     content: none;
 }
@@ -51,11 +132,27 @@ table {
 }
 
 /* Global */
-body{
-    background-color: rgb(247,249,248);
+body {
+    background-color: rgb(247, 249, 248);
     margin: 1.5rem 5% 1% 5%;
 
 }
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px); 
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
 /* Fin Global */
 
 /* Header */
@@ -67,76 +164,79 @@ header {
     margin-bottom: 1rem;
 }
 
-.header_logo svg{
-   color: rgb(7,66,51);
+.header_logo svg {
+    color: rgb(7, 66, 51);
 }
 
-.header_nav ul{
+.header_nav ul {
     display: flex;
     flex-direction: row;
 }
 
-.header_nav ul li{
+.header_nav ul li {
     margin-right: 10px;
 }
 /* Fin Header */
 
-/* Index Main */
-
-#resultServicios ul li{
+/* Index Main *//* Index Main *//* Index Main */
+/* Resultados *//* Resultados */
+.resultados ul li {
     display: flex;
     flex-direction: row;
     align-items: center;
     border-radius: 5px;
     padding: .7rem;
     margin: 5px 0 5px 0;
-    
+    font-weight: 300;
     background-color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
 }
 
-#resultServicios ul li div{
-    background-color: rgb(209,250,229);
+/* highlights resultados */
+#resultServicios .highlight{
+    background-color: rgb(209, 250, 229);
     margin-left: 4px;
     border-radius: 5px;
-   padding: 5px;
+    padding: 5px;
     font-weight: 400;
-
 }
 
-#resultServicios ul li:last-child{
+#resultServicios .highlight{
+    background-color: rgb(209, 250, 229);
+    margin-left: 4px;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 400;
+}
+/* FIN highlights resultados */
+
+.resultados ul li:last-child {
     margin-bottom: 10px;
 }
 
-#fetchServicios{
+.botoesFetch {
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
     color: #fff;
-    background-color: rgb(7,66,51); 
-    border-radius: 5px; 
+    background-color: rgb(7, 66, 51);
+    border-radius: 5px;
     cursor: pointer;
 }
+/* FIN Resultados *//* FIN Resultados */
 
-
-/*Edicion formularios*/
-
-/* Centra los formulacios en pantalla */
-.formularios, p {
+/*Formularios*/
+.formularios,
+p {
     display: grid;
     place-content: center;
     text-align: center;
 }
-/*///////////////////////////////////*/
 
-/* Clase auxiliar que hace invisible algunas partes del documento HTML para dar dinamismo*/
-.desactivado {
+.desactivado { /* Clase auxiliar que hace invisible algunas partes del documento HTML para dar dinamismo*/
     display: none;
 }
-/*///////////////*/
-
-/*///////////////////*/
-
-/* Fin Index Main */
+/* Fin Formularios*/
+/* Fin Index Main *//* Fin Index Main *//* Fin Index Main */

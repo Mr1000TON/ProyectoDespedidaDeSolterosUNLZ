@@ -1,50 +1,104 @@
-document.getElementById('fetchServicios').addEventListener('click', () => {
-    fetch('https://localhost:7282/ControladorServicio/ObtenerServicios')
+document.querySelectorAll('button[data-url]').forEach(button => {
+    button.addEventListener('click', () => {
+        const url = button.getAttribute('data-url');
+        const target = button.getAttribute('data-target');
+        const type = button.getAttribute('data-type');
+
+        fetchDataAndDisplay(url, target, type);
+    });
+});
+
+document.getElementById('localidadForm').addEventListener('submit', event => {
+    event.preventDefault();
+
+    document.querySelector("#resultLocalidades").innerHTML = "";
+    const idLocalidad = document.getElementById('idLocalidad').value;
+    const url = `https://localhost:7282/ControladorLocalidad/ObtenerLocalidad/${idLocalidad}`;
+    fetchLocalidad(url, 'resultLocalidad');
+});
+
+function fetchDataAndDisplay(url, target, type) {
+    fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('No se pudo conectar con la api');
             }
             return response.json();
         })
         .then(data => {
-            console.log(data); // Verifica la estructura de data en la consola
-            const serviciosList = document.createElement('ul');
-            data.forEach(servicio => {
-                const servicioItem = document.createElement('li');
-                servicioItem.textContent = `${servicio.idServicio} - ${servicio.descripcion}`;
+            console.log(data); // Necesito ver y controlar el json
 
-                // Crear un div para el precio del servicio
-                const precioDiv = document.createElement('div');
-                precioDiv.textContent = `$${servicio.precioServicio}`;
-                precioDiv.classList.add('precio-servicio'); // Agregar clase al div
-
-                // Agregar el div de precio como hijo del servicioItem
-                servicioItem.appendChild(precioDiv);
-
-                serviciosList.appendChild(servicioItem);
+            let html = '<ul class="fade-in">';
+            data.forEach(item => {
+                if (type === 'servicios') {
+                    html += `
+                        <li class="fade-in">
+                            ${item.idServicio} - ${item.descripcion}
+                            <div class="highlight">$${item.precioServicio}</div>
+                        </li>
+                    `;
+                } else if (type === 'localidades') {
+                    document.querySelector("#resultLocalidad").innerHTML = "";
+                    html += `
+                        <li class="fade-in">
+                            ${item.idLocalidad} - ${item.nombreLocalidad}
+                        </li>
+                    `;
+                }
             });
+            html += '</ul>';
 
-            document.getElementById('resultServicios').innerHTML = '';
-            document.getElementById('resultServicios').appendChild(serviciosList);
+            const resultElement = document.getElementById(target);
+            resultElement.innerHTML = '';
+            resultElement.innerHTML = html;
+
+            void resultElement.offsetWidth;
         })
         .catch(error => console.error('Error:', error));
-});
+}
 
-//Variables globales
+function fetchLocalidad(url, target) {
 
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo conectar con la api');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+
+            const resultElement = document.getElementById(target);
+            resultElement.innerHTML = '';
+            const html = `
+                <ul class="fade-in">
+                    <li class="fade-in">
+                        ${data.idLocalidad} - ${data.nombreLocalidad}
+                        <div class="highlight"></div>
+                    </li>
+                </ul>
+            `;
+            resultElement.innerHTML = html;
+            void resultElement.offsetWidth;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// nota 15 de junio: lo comento momentaneamente
+
+// Variables globales
 // Se almacenan en las variables las clases y las Ids de las etiquetas
 let inicio = document.querySelector(".inicio").classList;
 let registro = document.querySelector(".registro").classList;
 let formulario_validacion = document.getElementById("validacion_usuario").classList;
 let formulario_registro = document.getElementById("registro_usuario").classList;
 let parrafo_aux = document.querySelector(".aux")
-
 ////////////////////
-
 /*
     Este metodo se encarga de obtener los datos del formulario,
     hacer la peticion a la api y validar el usuario en caso de inicio de sesion 
-*/
+
 document.getElementById('validacion_usuario').addEventListener("submit", function (evet) {
 
     //Evita que la web se recargue cuando se envia el formulario
@@ -79,7 +133,7 @@ document.getElementById('validacion_usuario').addEventListener("submit", functio
 /*
     Este metodo se encarga de obtener los datos del formulario,
     hacer la peticion a la api y registrar el usuario en caso de registro
-*/
+*//*
 document.getElementById('registro_usuario').addEventListener("submit", function (evet) {
 
     //Evita que la web se recargue cuando se envia el formulario
@@ -122,8 +176,8 @@ document.getElementById('registro_usuario').addEventListener("submit", function 
 /*  
     Esta funcion se encarga de modificar el documento
     para hacer aparecer o desaparecer los 
-    formularios de registro o inicio de sesión
-*/
+    formularios de registro o inicio de sesiï¿½n
+*//* 
 function ModificarDOM(Id_btn) {
 
     // Espera a que un Id del boton genere el evento click
@@ -150,6 +204,7 @@ function ModificarDOM(Id_btn) {
     })
 }
 
-// Se envian los Id de los botones como parametro 
+// Se envian los Id de los botones como parametro  
 ModificarDOM("btn_ini");
 ModificarDOM("btn_reg");
+*/
