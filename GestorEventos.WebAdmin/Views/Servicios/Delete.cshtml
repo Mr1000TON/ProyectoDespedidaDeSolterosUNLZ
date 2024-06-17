@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar Servicio</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<!--<h3>Esta seguro de borrar este servicio?</h3>-->
 <div>
-    <h4>Servicio</h4>
+    <h4>Detalle del servicio</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -31,9 +31,9 @@
             @Html.DisplayFor(model => model.PrecioServicio)
         </dd>
     </dl>
-    
+    <h4>Esta seguro de borrar este servicio?</h4>
     <form asp-action="Delete" asp-route-id="@Model.IdServicio">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
+        <a asp-action="Index">Atras</a>
     </form>
 </div>
