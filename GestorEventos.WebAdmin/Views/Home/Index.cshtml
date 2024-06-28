@@ -1,8 +1,146 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sample App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header>
+        <div class="header_logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-alipay" viewBox="0 0 16 16">
+                <path d="M2.541 0H13.5a2.55 2.55 0 0 1 2.54 2.563v8.297c-.006 0-.531-.046-2.978-.813-.412-.14-.916-.327-1.479-.536q-.456-.17-.957-.353a13 13 0 0 0 1.325-3.373H8.822V4.649h3.831v-.634h-3.83V2.121H7.26c-.274 0-.274.273-.274.273v1.621H3.11v.634h3.875v1.136h-3.2v.634H9.99c-.227.789-.532 1.53-.894 2.202-2.013-.67-4.161-1.212-5.51-.878-.864.214-1.42.597-1.746.998-1.499 1.84-.424 4.633 2.741 4.633 1.872 0 3.675-1.053 5.072-2.787 2.08 1.008 6.37 2.738 6.387 2.745v.105A2.55 2.55 0 0 1 13.5 16H2.541A2.55 2.55 0 0 1 0 13.437V2.563A2.55 2.55 0 0 1 2.541 0" />
+                <path d="M2.309 9.27c-1.22 1.073-.49 3.034 1.978 3.034 1.434 0 2.868-.925 3.994-2.406-1.602-.789-2.959-1.353-4.425-1.207-.397.04-1.14.217-1.547.58Z" />
+            </svg>
+        </div>
+        <nav class="header_nav">
+            <ul>
+                <li>a</li>
+                <li>b</li>
+                <li>c</li>
+            </ul>
+        </nav>
+    </header>
+    <main id="index_main">
+        <section id="index_main_botonera">
+            <button class="botoesFetch" data-url="https://localhost:7282/ControladorServicio/ObtenerServicios" data-target="resultServicios" data-type="servicios">Obtener Servicios</button>
+            <button class="botoesFetch" data-url="https://localhost:7282/ControladorLocalidad/ObtenerLocalidad" data-target="resultLocalidades" data-type="localidades">Obtener Localidades</button>
+            <form id="localidadForm">
+                <label for="idLocalidad">ID Localidad:</label>
+                <input type="text" id="idLocalidad" name="idLocalidad" required>
+                <button class="botoesFetch" type="submit">Obtener Localidad</button>
+            </form>
+        </section>
+        <section id="index_main_resultados">
+            <div class="resultados" id="resultLocalidades"></div>
+            <div class="resultados" id="resultLocalidad"></div>
+            <div class="resultados" id="resultServicios"></div>
+        </section>
+    </main>
+    <script>
+        document.querySelectorAll('button[data-url]').forEach(button => {
+            button.addEventListener('click', () => {
+                const url = button.getAttribute('data-url');
+                const target = button.getAttribute('data-target');
+                const type = button.getAttribute('data-type');
+
+                fetchDataAndDisplay(url, target, type);
+            });
+        });
+
+        document.getElementById('localidadForm').addEventListener('submit', event => {
+            event.preventDefault();
+
+            document.querySelector("#resultLocalidades").innerHTML = "";
+            const idLocalidad = document.getElementById('idLocalidad').value;
+            const url = `https://localhost:7282/ControladorLocalidad/ObtenerLocalidad/${idLocalidad}`;
+            fetchLocalidad(url, 'resultLocalidad');
+        });
+
+        function fetchDataAndDisplay(url, target, type) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo conectar con la api');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Necesito ver y controlar el json
+
+                    let html = '<ul class="fade-in">';
+                    data.forEach(item => {
+                        if (type === 'servicios') {
+                            html += `
+                                <li class="fade-in">
+                                    ${item.idServicio} - ${item.descripcion}
+                                    <div class="highlight">$${item.precioServicio}</div>
+                                </li>
+                            `;
+                        } else if (type === 'localidades') {
+                            document.querySelector("#resultLocalidad").innerHTML = "";
+                            html += `
+                                <li class="fade-in">
+                                    ${item.idLocalidad} - ${item.nombreLocalidad}
+                                </li>
+                            `;
+                        }
+                    });
+                    html += '</ul>';
+
+                    const resultElement = document.getElementById(target);
+                    resultElement.innerHTML = '';
+                    resultElement.innerHTML = html;
+
+                    void resultElement.offsetWidth;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function fetchLocalidad(url, target) {
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo conectar con la api');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+
+                    const resultElement = document.getElementById(target);
+                    resultElement.innerHTML = '';
+                    const html = `
+                        <ul class="fade-in">
+                            <li class="fade-in">
+                                ${data.idLocalidad} - ${data.nombreLocalidad}
+                                <div class="highlight"></div>
+                            </li>
+                        </ul>
+                    `;
+                    resultElement.innerHTML = html;
+                    void resultElement.offsetWidth;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

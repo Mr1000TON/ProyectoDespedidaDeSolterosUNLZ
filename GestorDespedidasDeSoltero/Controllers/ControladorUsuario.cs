@@ -24,6 +24,8 @@ namespace GestorDespedidasDeSoltero.Controllers
           
         }
 
+      
+
         [HttpPost("RegistrarUsuario")]
         public IActionResult RegistrarUsuario([FromBody] Usuario usuario)
         {
